@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="sidebar">
+
+    <h2>🏥 MediCare</h2>
+
+    <a href="/" class="active">
+        Dashboard
+    </a>
+
+    <a href="/patients">
+        Patients
+    </a>
+
+    <a href="/doctors">
+        Doctors
+    </a>
+
+    <a href="/appointments">
+        Appointments
+    </a>
+
+    <a href="/billing">
+        Billing
+    </a>
+
+</div>
+
+    <div class="main">
+
+        <div class="topbar">
+            <h1>Hospital Dashboard</h1>
+            <p>Welcome to MediCare Hospital</p>
+        </div>
+
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Patients</h3>
+                <h2>{{ patient_count }}</h2>
+                <p>Total Registered</p>
+            </div>
+
+            <div class="card">
+                <h3>Doctors</h3>
+                <h2>{{ doctor_count }}</h2>
+                <p>Available Doctors</p>
+            </div>
+
+            <div class="card">
+                <h3>Appointments</h3>
+                <h2>{{ appointment_count }}</h2>
+                <p>Today's Appointments</p>
+            </div>
+
+            <div class="card">
+                <h3>Revenue</h3>
+                <h2>₹85,000</h2>
+                <p>This Month</p>
+            </div>
+
+        </div>
+
+
+        <div class="welcome">
+
+            <h2>Welcome to Hospital Management System</h2>
+
+            <p>
+                Manage patients, doctors, appointments and billing
+                efficiently from one place.
+            </p>
+
+            <button>Register Patient</button>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

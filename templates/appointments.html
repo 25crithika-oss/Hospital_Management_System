@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments - MediCare</title>
+
+```
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<style>
+    .search-box {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+    }
+
+    .search-box input {
+        flex: 1;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 7px;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 7px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 7px;
+        font-size: 15px;
+    }
+
+    .form-group textarea {
+        min-height: 90px;
+        resize: vertical;
+    }
+
+    .full-width {
+        grid-column: 1 / -1;
+    }
+
+    .section-title {
+        color: #173b57;
+        margin-bottom: 15px;
+    }
+
+    @media (max-width: 700px) {
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .full-width {
+            grid-column: auto;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<div class="sidebar">
+    <h2>🏥 MediCare</h2>
+
+    <a href="/">Dashboard</a>
+    <a href="/patients">Patients</a>
+    <a href="/doctors">Doctors</a>
+    <a href="/appointments" class="active">Appointments</a>
+    <a href="/billing">Billing</a>
+</div>
+
+
+<div class="main">
+
+    <div class="topbar">
+        <h1>Appointments</h1>
+        <p>Book and manage patient appointments</p>
+    </div>
+
+
+    <!-- Appointment Booking Form -->
+
+    <div class="welcome">
+
+        <h2 class="section-title">📅 Book New Appointment</h2>
+
+        <form action="/register-appointment" method="POST">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Patient</label>
+
+                    <select name="patient_id" required>
+                        <option value="">Select Patient</option>
+
+                        {% for patient in patients %}
+                            <option value="{{ patient.id }}">
+                                {{ patient.name }}
+                            </option>
+                        {% endfor %}
+
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Doctor</label>
+
+                    <select name="doctor_id" required>
+                        <option value="">Select Doctor</option>
+
+                        {% for doctor in doctors %}
+                            <option value="{{ doctor.id }}">
+                                Dr. {{ doctor.name }} - {{ doctor.specialization }}
+                            </option>
+                        {% endfor %}
+
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Appointment Date</label>
+                    <input type="date" name="appointment_date" required>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Appointment Time</label>
+                    <input type="time" name="appointment_time" required>
+                </div>
+
+
+                <div class="form-group full-width">
+                    <label>Reason</label>
+                    <textarea name="reason"
+                              placeholder="Enter reason for appointment"
+                              required></textarea>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Status</label>
+
+                    <select name="status" required>
+                        <option value="Pending">Pending</option>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <button type="submit">Book Appointment</button>
+
+        </form>
+
+    </div>
+
+
+    <!-- Search -->
+
+    <div class="welcome">
+
+        <h2 class="section-title">🔍 Search Appointments</h2>
+
+        <form action="/appointments" method="GET">
+
+            <div class="search-box">
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search by patient or doctor..."
+                    value="{{ search }}"
+                >
+
+                <button type="submit">Search</button>
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- Appointment Records -->
+
+    <div class="welcome">
+
+        <h2 class="section-title">📋 Appointment Records</h2>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Patient</th>
+                        <th>Doctor</th>
+                        <th>Specialization</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Reason</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for appointment in appointments %}
+
+                    <tr>
+                        <td>{{ appointment.id }}</td>
+                        <td>{{ appointment.patient_name }}</td>
+                        <td>Dr. {{ appointment.doctor_name }}</td>
+                        <td>{{ appointment.specialization }}</td>
+                        <td>{{ appointment.appointment_date }}</td>
+                        <td>{{ appointment.appointment_time }}</td>
+                        <td>{{ appointment.reason }}</td>
+                        <td>{{ appointment.status }}</td>
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+                        <td colspan="8" style="text-align:center;">
+                            No appointments found.
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
+</body>
+</html>

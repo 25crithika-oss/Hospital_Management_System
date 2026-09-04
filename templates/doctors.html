@@ -1,0 +1,331 @@
+```html
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Doctors - Hospital Management System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <div class="sidebar">
+
+        <h2>🏥 MediCare</h2>
+
+        <a href="/">
+            Dashboard
+        </a>
+
+        <a href="/patients">
+            Patients
+        </a>
+
+        <a href="/doctors"
+           class="active">
+            Doctors
+        </a>
+
+        <a href="/appointments">
+            Appointments
+        </a>
+
+        <a href="/billing">
+            Billing
+        </a>
+
+        
+    </div>
+
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <div class="main">
+
+
+        <!-- TOP BAR -->
+
+        <div class="topbar">
+
+            <h1>
+                Doctor Management
+            </h1>
+
+            <p>
+                Register and manage hospital doctors
+            </p>
+
+        </div>
+
+
+
+        <!-- ================= DOCTOR REGISTRATION ================= -->
+
+        <div class="welcome">
+
+            <h2>
+                Register New Doctor
+            </h2>
+
+
+            <form action="/register-doctor"
+                  method="POST">
+
+
+                <!-- Doctor Name -->
+
+                <label>
+                    Doctor Name
+                </label>
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter doctor name"
+                    required>
+
+
+
+                <!-- Specialization -->
+
+                <label>
+                    Specialization
+                </label>
+
+                <select
+                    name="specialization"
+                    required>
+
+                    <option value="">
+                        Select Specialization
+                    </option>
+
+                    <option value="General Physician">
+                        General Physician
+                    </option>
+
+                    <option value="Cardiologist">
+                        Cardiologist
+                    </option>
+
+                    <option value="Neurologist">
+                        Neurologist
+                    </option>
+
+                    <option value="Dermatologist">
+                        Dermatologist
+                    </option>
+
+                    <option value="Orthopedic">
+                        Orthopedic
+                    </option>
+
+                    <option value="Pediatrician">
+                        Pediatrician
+                    </option>
+
+                    <option value="Gynecologist">
+                        Gynecologist
+                    </option>
+
+                </select>
+
+
+
+                <!-- Phone -->
+
+                <label>
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Enter phone number"
+                    required>
+
+
+
+                <!-- Experience -->
+
+                <label>
+                    Experience (Years)
+                </label>
+
+                <input
+                    type="number"
+                    name="experience"
+                    placeholder="Enter experience"
+                    min="0"
+                    required>
+
+
+
+                <!-- Available Days -->
+
+                <label>
+                    Available Days
+                </label>
+
+                <input
+                    type="text"
+                    name="available_days"
+                    placeholder="Example: Monday, Wednesday, Friday"
+                    required>
+
+
+
+                <!-- Register Button -->
+
+                <button type="submit">
+                    Register Doctor
+                </button>
+
+
+            </form>
+
+        </div>
+
+
+
+        <!-- ================= DOCTOR RECORDS ================= -->
+
+        <div class="welcome">
+
+            <h2>
+                Doctor Records
+            </h2>
+
+
+
+            <!-- Search -->
+
+            <form
+                class="search-form"
+                method="GET"
+                action="/doctors">
+
+
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search by name or specialization..."
+                    value="{{ search }}">
+
+
+                <button type="submit">
+                    Search
+                </button>
+
+
+            </form>
+
+
+
+            <!-- Doctor Table -->
+
+            {% if doctors %}
+
+            <div class="table-container">
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Name</th>
+
+                            <th>Specialization</th>
+
+                            <th>Phone</th>
+
+                            <th>Experience</th>
+
+                            <th>Available Days</th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody>
+
+                        {% for doctor in doctors %}
+
+                        <tr>
+
+                            <td>
+                                {{ doctor["id"] }}
+                            </td>
+
+                            <td>
+                                {{ doctor["name"] }}
+                            </td>
+
+                            <td>
+                                {{ doctor["specialization"] }}
+                            </td>
+
+                            <td>
+                                {{ doctor["phone"] }}
+                            </td>
+
+                            <td>
+                                {{ doctor["experience"] }} years
+                            </td>
+
+                            <td>
+                                {{ doctor["available_days"] }}
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+
+            {% else %}
+
+            <p>
+                No doctors registered yet.
+            </p>
+
+            {% endif %}
+
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>
+```

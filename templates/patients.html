@@ -1,0 +1,317 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Patients - Hospital Management System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <div class="sidebar">
+
+        <h2>🏥 MediCare</h2>
+
+        <a href="/">
+            Dashboard
+        </a>
+
+        <a href="/patients" class="active">
+            Patients
+        </a>
+
+        <a href="/doctors">
+            Doctors
+        </a>
+
+        <a href="#">
+            Appointments
+        </a>
+
+        <a href="#">
+            Billing
+        </a>
+
+    </div>
+
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <div class="main">
+
+
+        <!-- TOP BAR -->
+
+        <div class="topbar">
+
+            <h1>
+                Patient Registration
+            </h1>
+
+            <p>
+                Register and manage hospital patients
+            </p>
+
+        </div>
+
+
+
+        <!-- ================= PATIENT REGISTRATION ================= -->
+
+        <div class="welcome">
+
+            <h2>
+                Register New Patient
+            </h2>
+
+
+            <form action="/register-patient"
+                  method="POST">
+
+
+                <label>
+                    Patient Name
+                </label>
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter patient name"
+                    required>
+
+
+                <label>
+                    Age
+                </label>
+
+                <input
+                    type="number"
+                    name="age"
+                    placeholder="Enter age"
+                    min="1"
+                    required>
+
+
+                <label>
+                    Gender
+                </label>
+
+                <select name="gender" required>
+
+                    <option value="">
+                        Select Gender
+                    </option>
+
+                    <option value="Male">
+                        Male
+                    </option>
+
+                    <option value="Female">
+                        Female
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+
+                <label>
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Enter phone number"
+                    required>
+
+
+                <label>
+                    Blood Group
+                </label>
+
+                <select name="blood_group" required>
+
+                    <option value="">
+                        Select Blood Group
+                    </option>
+
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+
+                </select>
+
+
+                <label>
+                    Address
+                </label>
+
+                <textarea
+                    name="address"
+                    placeholder="Enter address"
+                    required></textarea>
+
+
+                <label>
+                    Symptoms
+                </label>
+
+                <textarea
+                    name="symptoms"
+                    placeholder="Enter symptoms"
+                    required></textarea>
+
+
+                <button type="submit">
+                    Register Patient
+                </button>
+
+
+            </form>
+
+        </div>
+
+
+
+        <!-- ================= PATIENT RECORDS ================= -->
+
+        <div class="welcome">
+
+            <h2>
+                Patient Records
+            </h2>
+
+
+            <!-- Search -->
+
+            <form
+                class="search-form"
+                method="GET"
+                action="/patients">
+
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search by name or phone..."
+                    value="{{ search }}">
+
+                <button type="submit">
+                    Search
+                </button>
+
+            </form>
+
+
+
+            <!-- Patient Table -->
+
+            {% if patients %}
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Phone</th>
+                            <th>Blood Group</th>
+                            <th>Symptoms</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for patient in patients %}
+
+                        <tr>
+
+                            <td>
+                                {{ patient["id"] }}
+                            </td>
+
+                            <td>
+                                {{ patient["name"] }}
+                            </td>
+
+                            <td>
+                                {{ patient["age"] }}
+                            </td>
+
+                            <td>
+                                {{ patient["gender"] }}
+                            </td>
+
+                            <td>
+                                {{ patient["phone"] }}
+                            </td>
+
+                            <td>
+                                {{ patient["blood_group"] }}
+                            </td>
+
+                            <td>
+                                {{ patient["symptoms"] }}
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            {% else %}
+
+            <p>
+                No patients registered yet.
+            </p>
+
+            {% endif %}
+
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>
+```

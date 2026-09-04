@@ -1,0 +1,284 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f7fb;
+    display: flex;
+}
+
+/* Sidebar */
+
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background: #173b57;
+    padding: 25px 15px;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.sidebar h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 14px 18px;
+    margin: 8px 0;
+    border-radius: 8px;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background: #2f80a8;
+}
+
+/* Main Content */
+
+.main {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+    padding: 35px;
+}
+
+/* Top Bar */
+
+.topbar {
+    margin-bottom: 30px;
+}
+
+.topbar h1 {
+    color: #173b57;
+    margin-bottom: 8px;
+}
+
+.topbar p {
+    color: #666;
+}
+
+/* Cards */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card h3 {
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.card h2 {
+    color: #173b57;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: #888;
+}
+
+/* Welcome Section */
+
+.welcome {
+    margin-top: 30px;
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.welcome h2 {
+    color: #173b57;
+    margin-bottom: 12px;
+}
+
+.welcome p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+button {
+    background: #2f80a8;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #246987;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .sidebar {
+        width: 180px;
+    }
+
+    .main {
+        margin-left: 180px;
+        width: calc(100% - 180px);
+        padding: 20px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}
+/* Patient Form */
+
+.welcome form {
+    margin-top: 25px;
+}
+
+.welcome label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 7px;
+    color: #333;
+    font-weight: bold;
+}
+
+.welcome input,
+.welcome select,
+.welcome textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    font-size: 15px;
+    outline: none;
+}
+
+.welcome textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.welcome input:focus,
+.welcome select:focus,
+.welcome textarea:focus {
+    border-color: #2f80a8;
+}
+
+.welcome form button {
+    margin-top: 20px;
+}
+
+
+/* Patient Table */
+
+.table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background: #173b57;
+    color: white;
+}
+
+tr:hover {
+    background: #f5f7fa;
+}
+/* Search Form */
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.search-form input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    font-size: 15px;
+    outline: none;
+}
+
+.search-form input:focus {
+    border-color: #2f80a8;
+}
+
+.search-form button {
+    padding: 12px 22px;
+}
+/* Patient Search */
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.search-form input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    font-size: 15px;
+    outline: none;
+}
+
+.search-form input:focus {
+    border-color: #2f80a8;
+}
+
+.search-form button {
+    padding: 12px 22px;
+}
+/* Fix Sidebar Click Issue */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.main {
+    position: relative;
+    z-index: 1;
+}

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Billing - MediCare</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="sidebar">
+
+        <h2>🏥 MediCare</h2>
+
+        <a href="/">Dashboard</a>
+
+        <a href="/patients">Patients</a>
+
+        <a href="/doctors">Doctors</a>
+
+        <a href="/appointments">Appointments</a>
+
+        <a href="/billing" class="active">Billing</a>
+
+    </div>
+
+
+    <div class="main">
+
+        <div class="topbar">
+
+            <h1>Billing & Payment</h1>
+
+            <p>Generate and manage patient bills</p>
+
+        </div>
+
+
+        <div class="welcome">
+
+            <h2>Create New Bill</h2>
+
+            <form action="/register-bill" method="POST">
+
+                <label>Patient</label>
+
+                <select name="patient_id" required>
+
+                    <option value="">Select Patient</option>
+
+                    {% for patient in patients %}
+
+                    <option value="{{ patient.id }}">
+                        {{ patient.name }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+
+                <label>Amount</label>
+
+                <input type="number"
+                       name="amount"
+                       placeholder="Enter amount"
+                       min="0"
+                       step="0.01"
+                       required>
+
+
+                <label>Payment Method</label>
+
+                <select name="payment_method" required>
+
+                    <option value="">Select Payment Method</option>
+
+                    <option value="Cash">Cash</option>
+
+                    <option value="UPI">UPI</option>
+
+                    <option value="Card">Card</option>
+
+                    <option value="Bank Transfer">Bank Transfer</option>
+
+                </select>
+
+
+                <label>Payment Status</label>
+
+                <select name="payment_status" required>
+
+                    <option value="Paid">Paid</option>
+
+                    <option value="Pending">Pending</option>
+
+                </select>
+
+
+                <label>Description</label>
+
+                <textarea name="description"
+                          placeholder="Enter billing details"></textarea>
+
+
+                <button type="submit">
+                    Generate Bill
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <div class="welcome">
+
+            <h2>Billing Records</h2>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>ID</th>
+                            <th>Patient</th>
+                            <th>Amount</th>
+                            <th>Payment Method</th>
+                            <th>Status</th>
+                            <th>Description</th>
+                            <th>Date</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for bill in bills %}
+
+                        <tr>
+
+                            <td>{{ bill.id }}</td>
+
+                            <td>{{ bill.patient_name }}</td>
+
+                            <td>₹ {{ bill.amount }}</td>
+
+                            <td>{{ bill.payment_method }}</td>
+
+                            <td>{{ bill.payment_status }}</td>
+
+                            <td>{{ bill.description }}</td>
+
+                            <td>{{ bill.bill_date }}</td>
+
+                        </tr>
+
+                        {% else %}
+
+                        <tr>
+
+                            <td colspan="7"
+                                style="text-align:center;">
+
+                                No billing records found.
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
